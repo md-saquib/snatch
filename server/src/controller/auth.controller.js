@@ -1,6 +1,7 @@
 import userModel from "../model/user.model.js";
 import bcrypt from 'bcryptjs'
 import { refreshTokenVerifier, tokengerator } from "../utils/authTokenGenerator.js";
+import config from "../config/config.js";
 
 export const Register = async (req, res) => {
 
@@ -28,8 +29,8 @@ export const Register = async (req, res) => {
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            secure: config.NODE_ENV === 'production',
+            sameSite: config.NODE_ENV === 'production' ? 'none' : 'lax',
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days milliseconds mein
         });
 
@@ -107,8 +108,8 @@ export const Login = async (req, res) => {
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            secure: config.NODE_ENV === 'production',
+            sameSite: config.NODE_ENV === 'production' ? 'none' : 'lax',
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days milliseconds mein
         });
         user.password = null
@@ -172,8 +173,8 @@ export const RefreshToken = async (req, res) => {
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            secure: config.NODE_ENV === 'production',
+            sameSite: config.NODE_ENV === 'production' ? 'none' : 'lax',
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days milliseconds mein
         });
 
